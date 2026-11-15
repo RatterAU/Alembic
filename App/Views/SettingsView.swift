@@ -121,8 +121,6 @@ struct SettingsView: View {
                 Section {
                     Text("No accounts, no ads, no analytics. Alembic only connects to the sites you download from, to GitHub to update yt-dlp, and, when you turn on sponsor cutting, to the SponsorBlock service.")
                         .font(.footnote).foregroundStyle(.secondary)
-                    Text("Download only what you have the right to.")
-                        .font(.footnote).foregroundStyle(.secondary)
                 }
             }
             .scrollContentBackground(.hidden)

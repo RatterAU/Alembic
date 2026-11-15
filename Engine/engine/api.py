@@ -208,7 +208,7 @@ def init(args: dict) -> dict:
 
 def _load_ytdlp(strict: bool) -> None:
     import yt_dlp  # noqa: F401  (path chosen by updater.activate)
-    from . import jsc
+    from . import jsc, sponsorblock
     STATE['jsc_error'] = None
     try:
         jsc.register()
@@ -216,6 +216,11 @@ def _load_ytdlp(strict: bool) -> None:
         if strict:
             raise RuntimeError(f'its YouTube solver hook failed ({e})') from e
         STATE['jsc_error'] = _clean_error(e)
+    try:
+        sponsorblock.register()
+    except Exception as e:
+        if strict:
+            raise RuntimeError(f'its SponsorBlock cut hook failed ({e})') from e
     if strict:
         # The calls every look-up and download make, without touching the network.
         with _ydl(['--no-playlist'], _Logger(None)) as ydl:

@@ -25,7 +25,7 @@ The real yt-dlp and FFmpeg run on the iPhone itself, with no server, no account,
 &nbsp;
 <img src="docs/screenshots/library.png" width="260" alt="The library: Tears of Steel, Spring, Sintel and Big Buck Bunny with thumbnails, format, length and size">
 
-<sub>Real screenshots. Every video shown is a Creative Commons film by the Blender Foundation.</sub>
+<sub>Real screenshots, with Blender Foundation open movies.</sub>
 
 </div>
 
@@ -41,7 +41,7 @@ The real yt-dlp and FFmpeg run on the iPhone itself, with no server, no account,
 
 **Only the part you want.** Download a clip by time or by chapter. Only that part is fetched.
 
-**Finished files are finished.** Cover art, title, artist and chapters are written into the file. Subtitles in any language, including YouTube's automatic ones. SponsorBlock can cut out sponsor segments.
+**Finished files are finished.** Cover art, title, artist and chapters are written into the file. Subtitles in any language, including YouTube's automatic ones. SponsorBlock cuts out sponsors, self-promos and subscribe reminders, with no re-encoding and the audio still in sync.
 
 **Playlists and channels.** Tick the videos you want and choose one quality for all of them.
 
@@ -61,7 +61,7 @@ The real yt-dlp and FFmpeg run on the iPhone itself, with no server, no account,
 </div>
 
 > [!NOTE]
-> Alembic never signs in to anything and never uses your accounts or cookies, so it can't get an account banned. Download only what you have the right to.
+> Alembic never signs in to anything and never touches your accounts or cookies, so there's no account to get banned.
 
 ## Install it
 
@@ -96,7 +96,8 @@ iOS apps can't run other programs, so Alembic brings everything inside the app:
 ```
 App/          SwiftUI app, Python host (PythonHost.m), in-process FFmpeg runner (ToolRunner.c)
 Engine/       The Python side: api.py (commands and jobs), procs.py (subprocess bridge),
-              jsc.py (WebKit solver), updater.py + pgp.py (signed updates), tests/
+              jsc.py (WebKit solver), sponsorblock.py (keyframe-aligned cuts),
+              updater.py + pgp.py (signed updates), tests/
 scripts/      build-ffmpeg.sh, fetch-engine.sh, install-python.sh (Xcode build phase)
 project.yml   XcodeGen project
 ```

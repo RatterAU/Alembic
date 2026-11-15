@@ -182,8 +182,51 @@ def t_updater_guards():
     assert not os.path.exists(os.path.join(d, 'active.json'))
 
 
+def t_sponsor_cut():
+    # A white flash and a beep together every second, keyframes 5 s apart, and a cut that ends
+    # between keyframes: the case that used to leave junk at the seam and audio out of sync.
+    from yt_dlp import YoutubeDL
+    from yt_dlp.postprocessor.modify_chapters import ModifyChaptersPP
+    import re
+    sys_ffmpeg = shutil.which('ffmpeg')
+    assert sys_ffmpeg, 'needs a system ffmpeg (with lavfi and libx264) to make the test clip'
+    clip = os.path.join(work, 'tmp', 'sb_test.mp4')
+    os.makedirs(os.path.dirname(clip), exist_ok=True)
+    # shell=True keeps procs.py from swapping in the in-app ffmpeg, which has no lavfi or encoders.
+    subprocess.run(f"'{sys_ffmpeg}' -v error -y -f lavfi -i \"color=black:s=160x120:r=30:d=40,"
+                   f"drawbox=enable='between(mod(t\\,1)\\,0.5\\,0.533)':color=white:t=fill\" -f lavfi -i "
+                   f"\"aevalsrc='if(between(mod(t\\,1)\\,0.5\\,0.55)\\,sin(2*PI*1000*t)\\,0)':s=48000:d=40\" "
+                   f"-c:v libx264 -g 150 -keyint_min 150 -sc_threshold 0 -bf 2 -c:a aac '{clip}'",
+                   shell=True, check=True)
+    ydl = YoutubeDL({'ffmpeg_location': os.path.dirname(FFPROBE), 'quiet': True})
+    pp = ModifyChaptersPP(ydl, remove_sponsor_segments={'sponsor'})
+    _, info = pp.run({'filepath': clip, 'title': 'T', 'duration': 40, 'extractor_key': 'Youtube',
+                      'sponsorblock_chapters': [{'start_time': 12.3, 'end_time': 27.8, 'category': 'sponsor',
+                                                 'title': 'Sponsor', 'type': 'skip',
+                                                 '_categories': [('sponsor', 12.3, 27.8, 'Sponsor')]}]})
+    # The cut end moves to the next keyframe (30 s): 12.3 s + 10 s kept.
+    assert abs(info['duration'] - 22.3) < 0.01, info['duration']
+    real = float(subprocess.run([FFPROBE, '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', clip],
+                                capture_output=True, text=True, check=True).stdout)
+    assert abs(real - info['duration']) < 0.1, f'file is {real} s but chapters say {info["duration"]} s'
+    log = subprocess.run(f"'{sys_ffmpeg}' -hide_banner -i '{clip}' -vf signalstats,metadata=print:key=lavfi.signalstats.YAVG "
+                         f"-af silencedetect=n=-30dB:d=0.1 -f null -", shell=True, capture_output=True, text=True).stderr
+    flashes, t = [], 0.0
+    for line in log.splitlines():
+        if m := re.search(r'pts_time:([\d.]+)', line):
+            t = float(m.group(1))
+        if (m := re.search(r'YAVG=([\d.]+)', line)) and float(m.group(1)) > 100 and (not flashes or t - flashes[-1] > 0.2):
+            flashes.append(t)
+    beeps = [float(x) for x in re.findall(r'silence_end: ([\d.]+)', log)]
+    # 12 before the cut (0.5 .. 11.5) and 10 after (30.5 .. 39.5): no sponsor footage left, nothing doubled.
+    assert len(flashes) == 22, f'{len(flashes)} flashes: {flashes}'
+    assert len([b for b in beeps if b < real - 0.3]) == 22, f'beeps: {beeps}'
+    worst = max(min(abs(b - f) for b in beeps) for f in flashes)
+    assert worst < 0.04, f'audio is {worst * 1000:.0f} ms out of sync'
+
+
 TESTS = [t_bad_url, t_probe, t_probe_channel, t_probe_cancel, t_video, t_av1opus, t_audio_m4a,
-         t_mp3, t_opus_from_aac, t_trim_progress, t_cancel, t_rescue, t_remux, t_updater_guards]
+         t_mp3, t_opus_from_aac, t_trim_progress, t_sponsor_cut, t_cancel, t_rescue, t_remux, t_updater_guards]
 
 if __name__ == '__main__':
     assert os.access(FFPROBE, os.X_OK), 'run scripts/build-ffmpeg.sh first'
