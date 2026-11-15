@@ -1,0 +1,5 @@
+# Pure-Python packages bundled into the app. Installed with --require-hashes:
+# pip refuses anything whose hash differs. To update: put the new versions in a
+# requirements.in and run `uv pip compile --generate-hashes requirements.in`.
+mutagen==1.48.1 --hash=sha256:4f077fe87d3fc7fba259aa63d8c026b18382ca6a42ef37c61e16f1b1b5b82fe7
+certifi==2026.10.23 --hash=sha256:e9b54de76e530bb6cf0ccd036787103acb58fd42ba930ea8bf948ddbaa2f61d1
