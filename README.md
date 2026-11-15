@@ -4,18 +4,9 @@
 
 # Alembic
 
-**yt-dlp as a real iPhone app. Paste a link, pick exactly what you want, and it's saved on your phone.**
+**Any video, straight onto your iPhone. No computer, no cable, no dodgy websites.**
 
-The real yt-dlp and FFmpeg run on the iPhone itself, with no server, no account, no ads and no tracking.
-
-![iOS 26+](https://img.shields.io/badge/iOS-26%2B-3B1D5C?style=flat-square&logo=apple&logoColor=white)
-![Swift](https://img.shields.io/badge/Swift-SwiftUI-F05138?style=flat-square&logo=swift&logoColor=white)
-![GPL-3.0](https://img.shields.io/badge/licence-GPL--3.0-555?style=flat-square)
-![No ads](https://img.shields.io/badge/ads-none-1F7A4D?style=flat-square)
-![No accounts](https://img.shields.io/badge/accounts-none-1F7A4D?style=flat-square)
-![No tracking](https://img.shields.io/badge/analytics-none-1F7A4D?style=flat-square)
-
-[**What it does**](#what-it-does) · [**Install it**](#install-it) · [**Under the hood**](#under-the-hood) · [**Security**](#security) · [**Building**](#building-it-yourself) · [**Licence**](#licence)
+Copy a link, paste it, tap Download. The real yt-dlp and FFmpeg do the work on the phone itself.
 
 <br>
 
@@ -25,27 +16,56 @@ The real yt-dlp and FFmpeg run on the iPhone itself, with no server, no account,
 &nbsp;
 <img src="docs/screenshots/library.png" width="260" alt="The library: Tears of Steel, Spring, Sintel and Big Buck Bunny with thumbnails, format, length and size">
 
-<sub>Real screenshots, with Blender Foundation open movies.</sub>
+<sub><b>Paste it</b> · <b>Pick it</b> · <b>Keep it</b></sub>
+
+<br><br>
+
+### [Get it for iPhone](#install-it)
+
+<sub>Free, no App Store, no sign-up. iOS 26 or newer. Latest: [version 1.0](../../releases/latest).</sub>
+
+<sub>**Already use LiveContainer, SideStore or AltStore?** Add [my app source](https://ratterau.github.io/apps/) once and install and update Alembic with one tap.</sub>
+
+<br>
+
+![iOS 26+](https://img.shields.io/badge/iOS-26%2B-3B1D5C?style=flat-square&logo=apple&logoColor=white)
+![Swift](https://img.shields.io/badge/Swift-SwiftUI-F05138?style=flat-square&logo=swift&logoColor=white)
+![GPL-3.0](https://img.shields.io/badge/licence-GPL--3.0-555?style=flat-square)
+![No ads](https://img.shields.io/badge/ads-none-1F7A4D?style=flat-square)
+![No accounts](https://img.shields.io/badge/accounts-none-1F7A4D?style=flat-square)
+![No tracking](https://img.shields.io/badge/analytics-none-1F7A4D?style=flat-square)
+
+[**Why**](#why) · [**What it does**](#what-it-does) · [**Install it**](#install-it) · [**Under the hood**](#under-the-hood) · [**Security**](#security) · [**Building**](#building-it-yourself)
 
 </div>
 
 ---
 
+## Why
+
+You want a video on your iPhone. Not a link to it: the actual file, for the flight, the gym, or before it disappears.
+
+Here's how that usually goes. Open the laptop. Find a downloader website, dodge the fake *Download* buttons and the pop-ups, and get back a 720p file with the sound slightly off. Then get it onto the phone: plug in a cable, wait on AirDrop, or upload it to the cloud just to download it again. Ten minutes and two devices for one video.
+
+Alembic is the proper way. Copy the link on your iPhone, paste it, tap Download. You pick the quality and get exactly that, and it's in your library a few seconds later. No computer, no cable, no ads, no nonsense.
+
+Under the hood it's [yt-dlp](https://github.com/yt-dlp/yt-dlp), the open-source downloader power users swear by, running for real on the phone. No server in the middle, nothing to pay for, nothing watching.
+
 ## What it does
 
-**Paste a link, see what's there.** Copy a link from YouTube, X, Instagram, Reddit, TikTok or [any of the sites yt-dlp supports](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md), and Alembic shows the title, length and every stream on offer.
+**Paste a link, see what's there.** YouTube, X, Instagram, Reddit, TikTok or [any of the sites yt-dlp supports](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md). Alembic shows the title, length and every stream on offer.
 
-**Simple when you want it, exact when you need it.** Pick a quality and you're done. Or choose codecs (AV1, VP9, HEVC, H.264 for video; Opus or AAC for audio) and a container (MP4, MKV, WebM, MOV). Or turn on *Choose exact streams* and pick any video stream with any audio stream, like `yt-dlp -F`. Containers that can't hold your streams are caught before you download, not after.
+**Simple when you want it, exact when you need it.** Pick a quality and you're done. Or choose codecs (AV1, VP9, HEVC, H.264 for video; Opus or AAC for audio) and a container (MP4, MKV, WebM, MOV). Or turn on *Choose exact streams* and pair any video stream with any audio stream, like `yt-dlp -F`. Containers that can't hold your streams are caught before you download, not after.
 
-**Audio only.** M4A (the default), MP3, Opus, FLAC or WAV. When the stream is already in the format you asked for, it's saved without re-encoding.
+**Audio only.** M4A, MP3, Opus, FLAC or WAV. When the stream is already in the format you asked for, it's saved as is, with no re-encoding.
 
-**Only the part you want.** Download a clip by time or by chapter. Only that part is fetched.
+**Just the part you want.** Download a clip by time or by chapter. Only that part is fetched.
 
 **Finished files are finished.** Cover art, title, artist and chapters are written into the file. Subtitles in any language, including YouTube's automatic ones. SponsorBlock cuts out sponsors, self-promos and subscribe reminders, with no re-encoding and the audio still in sync.
 
 **Playlists and channels.** Tick the videos you want and choose one quality for all of them.
 
-**A library on the phone.** Everything you've downloaded, with thumbnails, search and Apple's own player (AirPlay, Picture in Picture). Save videos to Photos, share them, or convert MKV/WebM to MP4 without losing quality. Every file is also in the Files app.
+**A library on the phone.** Everything you've downloaded, with thumbnails, search and Apple's own player (AirPlay, Picture in Picture). Save to Photos, share, or turn MKV and WebM into MP4 without losing quality. Every file is in the Files app too.
 
 **Several at once.** Up to five downloads in parallel, with progress, speed and time left. Cancel any of them, or retry and it picks up where it stopped.
 
@@ -53,11 +73,13 @@ The real yt-dlp and FFmpeg run on the iPhone itself, with no server, no account,
 
 <div align="center">
 <br>
-<img src="docs/screenshots/media-dark.png" width="260" alt="Sintel looked up in dark mode">
+<img src="docs/screenshots/media-dark.png" width="260" alt="Spring looked up in dark mode, with its thumbnail, quality and codec choices">
 &nbsp;
-<img src="docs/screenshots/library-dark.png" width="260" alt="The library in dark mode">
+<img src="docs/screenshots/library-dark.png" width="260" alt="The library in dark mode: Tears of Steel, Spring, Sintel and Big Buck Bunny">
 &nbsp;
 <img src="docs/screenshots/settings.png" width="260" alt="Settings: yt-dlp version, release channel, automatic updates and parallel downloads">
+
+<sub>Real screenshots, with Blender Foundation open movies.</sub>
 </div>
 
 > [!NOTE]
@@ -80,7 +102,7 @@ New to LiveContainer? The step-by-step setup (iloader, pairing file, SideStore, 
 
 **Where your files go:** the Files app, under *On My iPhone → Alembic*. Under LiveContainer, look in LiveContainer's folder under *Data → Application*.
 
-**Keep Alembic open during big downloads.** iOS pauses apps in the background after a short while. Alembic notifies you if that happens, and Retry resumes where it stopped.
+**Keep Alembic open during big downloads.** iOS pauses apps in the background after a short while. Alembic lets you know if that happens, and Retry picks up where it stopped.
 
 ## Under the hood
 
@@ -91,6 +113,7 @@ iOS apps can't run other programs, so Alembic brings everything inside the app:
 | **yt-dlp** | The official release, running on CPython 3.13 ([BeeWare](https://github.com/beeware/Python-Apple-support)) embedded in the app. Unchanged, so it behaves exactly like yt-dlp on a computer |
 | **FFmpeg 9** | Built for iOS with only what yt-dlp needs (7 MB). `ffmpeg` and `ffprobe` are built as libraries; when yt-dlp starts them, Python's `subprocess` runs them in-process on a thread, wired to real pipes, so yt-dlp needs no changes |
 | **YouTube challenges** | yt-dlp normally needs Deno or Node for these. Alembic runs yt-dlp's own solver script in WebKit, in a locked-down hidden page with no network access |
+| **SponsorBlock cuts** | Each cut is moved to the next keyframe before yt-dlp joins the pieces, so they're joined without re-encoding and the audio stays in sync |
 | **The app** | SwiftUI, Liquid Glass, iOS 26+ |
 
 ```
