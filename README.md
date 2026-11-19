@@ -10,13 +10,12 @@ Copy a link, paste it, tap Download. The real yt-dlp and FFmpeg do the work on t
 
 <br>
 
-<img src="docs/screenshots/media.png" width="260" alt="Spring, a Blender open movie, looked up in Alembic: thumbnail, title, Video or Audio only, quality, video codec, audio codec and container choices">
-&nbsp;
-<img src="docs/screenshots/downloads.png" width="260" alt="Four downloads at once: Spring, Big Buck Bunny saved as M4A, Tears of Steel and Sintel downloading with progress">
-&nbsp;
-<img src="docs/screenshots/library.png" width="260" alt="The library: Tears of Steel, Spring, Sintel and Big Buck Bunny with thumbnails, format, length and size">
+<picture>
+  <source srcset="https://github.com/RatterAU/Alembic/raw/main/docs/promo/alembic-film.avif" type="image/avif">
+  <img src="docs/promo/alembic-film.jpg" width="100%" alt="Alembic in 40 seconds, filmed in the real app. Any video, straight onto your iPhone. Copy a link, paste it, and every format on offer appears. Pick the quality and see the file size first, 81.5 MB down to 41.7 MB. Pick the container; if it can't hold the streams, Alembic warns you and one tap fixes it. Just the audio, as M4A, MP3, Opus, FLAC or WAV. Just the part you want, by time or by chapter. Sponsor segments cut out with no re-encoding, the audio still in sync. Cover art, chapters and subtitles written into the file, straight to Photos. Four downloads at once. No ads, no accounts.">
+</picture>
 
-<sub><b>Paste it</b> · <b>Pick it</b> · <b>Keep it</b></sub>
+<sub>Recorded in the real app · [download it with sound](docs/promo/alembic-film.mp4) (MP4, 1080p)</sub>
 
 <br><br>
 
@@ -50,6 +49,20 @@ Here's how that usually goes. Open the laptop. Find a downloader website, dodge 
 Alembic is the proper way. Copy the link on your iPhone, paste it, tap Download. You pick the quality and get exactly that, and it's in your library a few seconds later. No computer, no cable, no ads, no nonsense.
 
 Under the hood it's [yt-dlp](https://github.com/yt-dlp/yt-dlp), the open-source downloader power users swear by, running for real on the phone. No server in the middle, nothing to pay for, nothing watching.
+
+<br>
+
+<div align="center">
+
+<img src="docs/screenshots/media.png" width="260" alt="Spring, a Blender open movie, looked up in Alembic: thumbnail, title, Video or Audio only, quality, video codec, audio codec and container choices">
+&nbsp;
+<img src="docs/screenshots/downloads.png" width="260" alt="Four downloads at once: Spring, Big Buck Bunny saved as M4A, Tears of Steel and Sintel downloading with progress">
+&nbsp;
+<img src="docs/screenshots/library.png" width="260" alt="The library: Tears of Steel, Spring, Sintel and Big Buck Bunny with thumbnails, format, length and size">
+
+<sub><b>Paste it</b> · <b>Pick it</b> · <b>Keep it</b></sub>
+
+</div>
 
 ## What it does
 
